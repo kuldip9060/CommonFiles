@@ -1,0 +1,512 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red100\green56\blue32;\red196\green26\blue22;\red0\green0\blue0;
+\red92\green38\blue153;\red170\green13\blue145;\red46\green13\blue110;\red0\green116\blue0;\red28\green0\blue207;
+\red63\green110\blue116;\red38\green71\blue75;}
+{\*\expandedcolortbl;;\csgenericrgb\c39100\c22000\c12500;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c0\c0\c0;
+\csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c66500\c5200\c56900;\csgenericrgb\c18100\c5200\c43100;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c11000\c0\c81000;
+\csgenericrgb\c24700\c43100\c45600;\csgenericrgb\c14900\c27800\c29400;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww24620\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Below the step of video editing.\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\b 1 >
+\b0  \
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf2 \CocoaLigature0 #import \cf3 <MobileCoreServices/MobileCoreServices.h>\cf2 \
+#import \cf3 <MediaPlayer/MediaPlayer.h>\cf2 \
+#import \cf3 <AVFoundation/AVFoundation.h>\cf2 \
+#import \cf3 <AVKit/AVKit.h>\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97
+\f1\fs30 \cf3 \CocoaLigature0 \
+
+\f0\b\fs24 \cf0 \CocoaLigature1 2 > 
+\b0 Add delegate  in .h file\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 <\cf5 UINavigationControllerDelegate\cf4 ,\cf5 UIImagePickerControllerDelegate\cf4 ,\cf5 MPMediaPickerControllerDelegate\cf4 ,\cf5 AVAudioPlayerDelegate\cf4 >\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97
+\b \
+3 > 
+\b0 Fetch Video from Device Gallery.\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 - (\cf6 IBAction\cf4 )btnGalleryPressed:(\cf6 id\cf4 )sender \{\
+    \
+    \cf5 UIImagePickerController\cf4  *videoPicker = [[\cf5 UIImagePickerController\cf4  \cf7 alloc\cf4 ] \cf7 init\cf4 ];\
+    videoPicker.\cf5 delegate\cf4  = \cf6 self\cf4 ;\
+    \cf8 //videoPicker.modalPresentationStyle = UIModalPresentationCurrentContext;\cf4 \
+    \cf8 //videoPicker.mediaTypes =[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];\cf4 \
+    videoPicker.\cf5 mediaTypes\cf4  = \cf9 @[\cf4 (\cf5 NSString\cf4 *)\cf5 kUTTypeMovie\cf4 , (\cf5 NSString\cf4 *)\cf5 kUTTypeAVIMovie\cf4 , (\cf5 NSString\cf4 *)\cf5 kUTTypeVideo\cf4 , (\cf5 NSString\cf4 *)\cf5 kUTTypeMPEG4\cf9 ]\cf4 ;\
+    videoPicker.\cf5 videoQuality\cf4  = \cf7 UIImagePickerControllerQualityTypeHigh\cf4 ;\
+    [\cf6 self\cf4  \cf7 presentViewController\cf4 :videoPicker \cf7 animated\cf4 :\cf6 YES\cf4  \cf7 completion\cf4 :\cf6 nil\cf4 ];\
+\}\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf2 #pragma mark: - media finish picking delegate methods\cf4 \
+- (\cf6 void\cf4 )imagePickerController:(\cf5 UIImagePickerController\cf4  *)picker didFinishPickingMediaWithInfo:(\cf5 NSDictionary\cf4  *)info \{\
+    \
+    \cf8 // This is the NSURL of the video object\cf4 \
+    \cf10 videoURL\cf4  = [info \cf7 objectForKey\cf4 :\cf5 UIImagePickerControllerMediaURL\cf4 ];\
+    \
+    \cf8 //    get Thumbnail image from videoURL\cf4 \
+    \cf6 self\cf4 .\cf10 imgThumbnail\cf4 .\cf5 image\cf4  = [\cf6 self\cf4  \cf11 generateThumbImage\cf4 :\cf10 videoURL\cf4 ];\
+   \
+    \
+    [\cf6 self\cf4  \cf11 playVideo\cf4 :\cf10 videoURL\cf4 ];\
+    \
+    \cf7 NSLog\cf4 (\cf3 @"VideoURL = %@"\cf4 , \cf10 videoURL\cf4 );\
+    [picker \cf7 dismissViewControllerAnimated\cf4 :\cf6 YES\cf4  \cf7 completion\cf4 :\cf6 NULL\cf4 ];\
+\}\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\b 4 >  
+\b0 Video editing with AUDIO\
+\
+	- pick audio from device music library\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf2 \CocoaLigature0 #pragma mark Media picker delegate methods\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf4 \
+-(\cf6 void\cf4 )mediaPicker:(\cf5 MPMediaPickerController\cf4  *)mediaPicker didPickMediaItems:(\cf5 MPMediaItemCollection\cf4  *)mediaItemCollection \{\
+    \
+    \cf8 // We need to dismiss the picker\cf4 \
+    [\cf6 self\cf4  \cf7 dismissViewControllerAnimated\cf4 :\cf6 YES\cf4  \cf7 completion\cf4 :\cf6 nil\cf4 ];\
+    \
+    \cf8 // Assign the selected item(s) to the music player and start playback.\cf4 \
+    \cf6 if\cf4  ([mediaItemCollection \cf7 count\cf4 ] < \cf9 1\cf4 ) \{\
+        \cf6 return\cf4 ;\
+    \}\
+    \cf5 MPMediaItem\cf4  *song = [[mediaItemCollection \cf7 items\cf4 ] \cf7 objectAtIndex\cf4 :\cf9 0\cf4 ];\
+    \cf7 NSLog\cf4 (\cf3 @"%@"\cf4 ,song);\
+    \
+    \cf6 if\cf4  (song) \{\
+        \cf10 audioURL\cf4  = [song \cf7 valueForProperty\cf4 :\cf5 MPMediaItemPropertyAssetURL\cf4 ];\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf8 //        [self handleAudioExportTapped:song];\cf4 \
+        \cf7 NSLog\cf4 (\cf3 @"%@"\cf4 ,[song \cf7 valueForProperty\cf4 :\cf5 MPMediaItemPropertyPodcastTitle\cf4 ]);\
+        \cf10 _btnAudioPlay\cf4 .\cf5 hidden\cf4  = \cf6 NO\cf4 ;\
+    \}\
+\}\
+\
+-(\cf6 void\cf4 )mediaPickerDidCancel:(\cf5 MPMediaPickerController\cf4  *)mediaPicker \{\
+    \
+    \cf8 // User did not select anything\cf4 \
+    \cf8 // We need to dismiss the picker\cf4 \
+    \
+    [\cf6 self\cf4  \cf7 dismissViewControllerAnimated\cf4 :\cf6 YES\cf4  \cf7 completion\cf4 :\cf6 nil\cf4 ];\
+\}\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 	- Merge video with selected audio\
+
+\f1\fs30 \cf4 \CocoaLigature0 \
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf2 #pragma mark: -merge Video with Audio\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf4 \
+-(\cf6 void\cf4 )mergeVideo:(\cf5 NSURL\cf4 *)vidURL withAudio:(\cf5 NSURL\cf4 *)audURL\{\
+    \
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf8 //    __block CameraSource* bThis = this;\cf4 \
+    \
+    \cf5 AVMutableComposition\cf4  *mixComposition = [\cf5 AVMutableComposition\cf4  \cf7 composition\cf4 ];\
+    \
+    \cf5 NSArray\cf4  *aDocumentpaths = \cf7 NSSearchPathForDirectoriesInDomains\cf4 (\cf7 NSDocumentDirectory\cf4 , \cf7 NSUserDomainMask\cf4 , \cf6 YES\cf4 );\
+    \cf5 NSString\cf4  *basePath = aDocumentpaths.\cf5 firstObject\cf4 ;\
+\
+    \cf5 NSURL\cf4     *video_inputFileUrl = vidURL;\
+\
+    \cf5 NSURL\cf4     *audio_inputFileUrl = audURL;\
+    \
+    \cf8 //NSString* path = [NSString stringWithFormat:@"%@/Output.mp4",basePath];\cf4 \
+    \cf5 NSString\cf4  *aVideoName = [[video_inputFileUrl \cf7 lastPathComponent\cf4 ] \cf7 stringByDeletingPathExtension\cf4 ];\
+    \cf5 NSString\cf4  *aAudioName = [[audio_inputFileUrl \cf7 lastPathComponent\cf4 ] \cf7 stringByDeletingPathExtension\cf4 ];\
+    \cf5 NSString\cf4 * path = [\cf5 NSString\cf4  \cf7 stringWithFormat\cf4 :\cf3 @"%@/%@_%@.mp4"\cf4 ,basePath,aVideoName,aAudioName];\
+    [[\cf5 NSFileManager\cf4  \cf7 defaultManager\cf4 ] \cf7 removeItemAtPath\cf4 :path \cf7 error\cf4 :\cf6 nil\cf4 ];\
+    \
+    \cf5 CMTime\cf4  nextClipStartTime = \cf5 kCMTimeZero\cf4 ;\
+    \
+    \cf5 AVURLAsset\cf4 * videoAsset = [[\cf5 AVURLAsset\cf4  \cf7 alloc\cf4 ]\cf7 initWithURL\cf4 :video_inputFileUrl \cf7 options\cf4 :\cf6 nil\cf4 ];\
+    \cf5 CMTimeRange\cf4  video_timeRange = \cf7 CMTimeRangeMake\cf4 (\cf5 kCMTimeZero\cf4 ,videoAsset.\cf5 duration\cf4 );\
+    \
+    \
+    \cf5 AVURLAsset\cf4 * audioAsset = [[\cf5 AVURLAsset\cf4  \cf7 alloc\cf4 ]\cf7 initWithURL\cf4 :audio_inputFileUrl \cf7 options\cf4 :\cf6 nil\cf4 ];\
+    \cf5 CMTimeRange\cf4  audio_timeRange = \cf7 CMTimeRangeMake\cf4 (\cf5 kCMTimeZero\cf4 , audioAsset.\cf5 duration\cf4 );\
+    \cf5 NSError\cf4 * error;\
+    \
+    \cf5 AVMutableCompositionTrack\cf4  *a_compositionVideoTrack = [mixComposition \cf7 addMutableTrackWithMediaType\cf4 :\cf5 AVMediaTypeVideo\cf4  \cf7 preferredTrackID\cf4 :\cf7 kCMPersistentTrackID_Invalid\cf4 ];\
+    [a_compositionVideoTrack \cf7 insertTimeRange\cf4 :video_timeRange \cf7 ofTrack\cf4 :[[videoAsset \cf7 tracksWithMediaType\cf4 :\cf5 AVMediaTypeVideo\cf4 ] \cf7 objectAtIndex\cf4 :\cf9 0\cf4 ] \cf7 atTime\cf4 :nextClipStartTime \cf7 error\cf4 :&error];\
+    \
+    \
+    \cf5 AVMutableCompositionTrack\cf4  *b_compositionAudioTrack = [mixComposition \cf7 addMutableTrackWithMediaType\cf4 :\cf5 AVMediaTypeAudio\cf4  \cf7 preferredTrackID\cf4 :\cf7 kCMPersistentTrackID_Invalid\cf4 ];\
+    [b_compositionAudioTrack \cf7 insertTimeRange\cf4 :video_timeRange \cf7 ofTrack\cf4 :[[audioAsset \cf7 tracksWithMediaType\cf4 :\cf5 AVMediaTypeAudio\cf4 ] \cf7 objectAtIndex\cf4 :\cf9 0\cf4 ] \cf7 atTime\cf4 :nextClipStartTime \cf7 error\cf4 :&error];\
+\
+    \
+    \cf8 // 5 - Create exporter\cf4 \
+    \cf5 AVAssetExportSession\cf4  *exporter = [[\cf5 AVAssetExportSession\cf4  \cf7 alloc\cf4 ]\cf7 initWithAsset\cf4 :mixComposition \cf7 presetName\cf4 :\cf5 AVAssetExportPresetPassthrough\cf4 ];\
+    \
+    exporter.\cf5 outputURL\cf4 =[\cf5 NSURL\cf4  \cf7 fileURLWithPath\cf4 :path];\
+\cf8 //    assetExport.outputFileType = @"public.mpeg-4";\cf4 \
+    exporter.\cf5 outputFileType\cf4  = \cf5 AVFileTypeMPEG4\cf4 ;\
+    exporter.\cf5 shouldOptimizeForNetworkUse\cf4  = \cf6 YES\cf4 ;\
+\cf8 //    exporter.videoComposition = mainCompositionInst;\cf4 \
+    [exporter \cf7 exportAsynchronouslyWithCompletionHandler\cf4 :^\{\
+        \cf7 dispatch_async\cf4 (\cf7 dispatch_get_main_queue\cf4 (), ^\{\
+            [\cf6 self\cf4  \cf11 saveVideo\cf4 :exporter \cf11 withDesinationPath\cf4 :path];\
+        \});\
+    \}];\
+    \
+\}\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\b 5 >  
+\b0 Video editing with SNAP TEXT (Ex. snap chat app.)\
+\
+ 	- Add text field layer on video	 \
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 - (\cf6 IBAction\cf4 )btnAddTextfieldPressed:(\cf6 id\cf4 )sender \{\
+    \
+    \cf8 //CGRect rect = AVMakeRectWithAspectRatioInsideRect(_imgThumbnail.image.size, _imgThumbnail.bounds);\cf4 \
+    \cf8 //NSLog(@"%@",NSStringFromCGRect(rect));\cf4 \
+    \
+    \cf5 CGSize\cf4  videoSize = [\cf6 self\cf4  \cf11 CGSizeAspectFit\cf4 :\cf10 _imgThumbnail\cf4 .\cf5 image\cf4 .\cf5 size\cf4  \cf11 withBounding\cf4 :\cf10 _imgThumbnail\cf4 .\cf5 frame\cf4 .\cf5 size\cf4 ]; \cf8 // Aspect Fit\cf4 \
+    \
+    \cf10 txtSnap\cf4  = [[\cf5 UITextField\cf4  \cf7 alloc\cf4 ] \cf7 init\cf4 ];\
+    \cf10 txtSnap\cf4 .\cf5 placeholder\cf4  = \cf3 @"Add snap text here..."\cf4 ;\
+    \cf10 txtSnap\cf4 .\cf5 font\cf4  = [\cf5 UIFont\cf4  \cf7 systemFontOfSize\cf4 :\cf9 14\cf4 ];\
+    \cf10 txtSnap\cf4 .\cf5 textColor\cf4  = [\cf5 UIColor\cf4  \cf7 whiteColor\cf4 ];\
+    \cf10 txtSnap\cf4 .\cf5 textAlignment\cf4  = \cf7 NSTextAlignmentCenter\cf4 ;\
+    \cf10 txtSnap\cf4 .\cf5 autocorrectionType\cf4  = \cf7 UITextAutocorrectionTypeNo\cf4 ;\
+    \cf10 txtSnap\cf4 .\cf5 backgroundColor\cf4  = [[\cf5 UIColor\cf4  \cf7 lightGrayColor\cf4 ] \cf7 colorWithAlphaComponent\cf4 :\cf9 0.7\cf4 ];\
+    \
+    \cf5 CGRect\cf4  fram = \cf10 txtSnap\cf4 .\cf5 frame\cf4 ;\
+    fram.\cf5 size\cf4 .\cf5 width\cf4  = \cf10 viewPlayer\cf4 .\cf5 frame\cf4 .\cf5 size\cf4 .\cf5 width\cf4 ;\
+    fram.\cf5 size\cf4 .\cf5 height\cf4  = \cf9 30\cf4 ;\
+    fram.\cf5 origin\cf4 .\cf5 y\cf4  = (videoSize.\cf5 height\cf4 -fram.\cf5 size\cf4 .\cf5 height\cf4 )/\cf9 2\cf4 ;\
+    [\cf10 txtSnap\cf4  \cf7 setFrame\cf4 :fram];\
+    [\cf10 viewPlayer\cf4  \cf7 addSubview\cf4 :\cf10 txtSnap\cf4 ];\
+   \
+    \cf5 UIPanGestureRecognizer\cf4  *panGesture = [[\cf5 UIPanGestureRecognizer\cf4  \cf7 alloc\cf4 ] \cf7 initWithTarget\cf4 :\cf6 self\cf4  \cf7 action\cf4 :\cf6 @selector\cf4 (handleGesturePan:)];\
+    [\cf10 txtSnap\cf4  \cf7 addGestureRecognizer\cf4 :panGesture];\
+    \
+\}
+\f0\fs24 \cf0 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 \
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf2 #pragma mark : - Gesture Action\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf4 - (\cf6 IBAction\cf4 )handleGesturePan:(\cf5 UIPanGestureRecognizer\cf4  *)sender \{\
+    \
+    \cf5 CGPoint\cf4  translation = [sender \cf7 translationInView\cf4 :\cf10 viewPlayer\cf4 ];\
+    \
+    \cf6 if\cf4 ( \cf7 CGRectContainsPoint\cf4 (\cf10 viewPlayer\cf4 .\cf5 bounds\cf4 , \cf7 CGPointMake\cf4 (sender.\cf5 view\cf4 .\cf5 center\cf4 .\cf5 x\cf4 ,\
+                                                           sender.\cf5 view\cf4 .\cf5 center\cf4 .\cf5 y\cf4  + translation.\cf5 y\cf4 )))\{\
+        sender.\cf5 view\cf4 .\cf5 center\cf4  = \cf7 CGPointMake\cf4 (sender.\cf5 view\cf4 .\cf5 center\cf4 .\cf5 x\cf4 ,\
+                                         sender.\cf5 view\cf4 .\cf5 center\cf4 .\cf5 y\cf4  + translation.\cf5 y\cf4 );\
+    \}\
+     \
+    [sender \cf7 setTranslation\cf4 :\cf7 CGPointMake\cf4 (\cf9 0\cf4 , \cf9 0\cf4 ) \cf7 inView\cf4 :\cf10 viewPlayer\cf4 ];\
+    \
+\}\
+\
+  - merge video with text\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf2 #pragma mark: -merge Video with Image OR Text\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf4 \
+- (\cf6 void\cf4 ) videoOutput\
+\{\
+    \cf5 AVURLAsset\cf4 * videoAsset = [[\cf5 AVURLAsset\cf4  \cf7 alloc\cf4 ]\cf7 initWithURL\cf4 :\cf10 videoURL\cf4  \cf7 options\cf4 :\cf6 nil\cf4 ];\
+    \
+    \cf8 //1 - Early exit if there's no video file selected\cf4 \
+    \cf6 if\cf4  (!videoAsset) \{\
+        \cf5 UIAlertView\cf4  *alert = [[\cf5 UIAlertView\cf4  \cf7 alloc\cf4 ] \cf7 initWithTitle\cf4 :\cf3 @"Error"\cf4  \cf7 message\cf4 :\cf3 @"Please Load a Video Asset First"\cf4 \
+                                                       \cf7 delegate\cf4 :\cf6 nil\cf4  \cf7 cancelButtonTitle\cf4 :\cf3 @"OK"\cf4  \cf7 otherButtonTitles\cf4 :\cf6 nil\cf4 ];\
+        [alert \cf7 show\cf4 ];\
+        \cf6 return\cf4 ;\
+    \}\
+    \
+    \cf8 // 2 - Create AVMutableComposition object. This object will hold your AVMutableCompositionTrack instances.\cf4 \
+    \cf5 AVMutableComposition\cf4  *mixComposition = [[\cf5 AVMutableComposition\cf4  \cf7 alloc\cf4 ] \cf7 init\cf4 ];\
+    \
+    \cf8 // 3 - Video track\cf4 \
+    \cf5 AVMutableCompositionTrack\cf4  *videoTrack = [mixComposition \cf7 addMutableTrackWithMediaType\cf4 :\cf5 AVMediaTypeVideo\cf4 \
+                                                                        \cf7 preferredTrackID\cf4 :\cf7 kCMPersistentTrackID_Invalid\cf4 ];\
+    [videoTrack \cf7 insertTimeRange\cf4 :\cf7 CMTimeRangeMake\cf4 (\cf5 kCMTimeZero\cf4 , videoAsset.\cf5 duration\cf4 )\
+                        \cf7 ofTrack\cf4 :[[videoAsset \cf7 tracksWithMediaType\cf4 :\cf5 AVMediaTypeVideo\cf4 ] \cf7 objectAtIndex\cf4 :\cf9 0\cf4 ]\
+                         \cf7 atTime\cf4 :\cf5 kCMTimeZero\cf4  \cf7 error\cf4 :\cf6 nil\cf4 ];\
+    \
+    \cf5 CGFloat\cf4  diffPointY = \cf10 viewPlayer\cf4 .\cf5 frame\cf4 .\cf5 size\cf4 .\cf5 height\cf4  - (\cf10 txtSnap\cf4 .\cf5 center\cf4 .\cf5 y\cf4  - \cf10 viewPlayer\cf4 .\cf5 layer\cf4 .\cf5 anchorPoint\cf4 .\cf5 y\cf4 );\
+    \
+    \cf8 //    text laye\cf4 \
+    \cf5 CGSize\cf4  videoSize = \cf6 self\cf4 .\cf10 imgThumbnail\cf4 .\cf5 image\cf4 .\cf5 size\cf4 ;\
+    \
+    \cf6 float\cf4  aScale = \cf6 self\cf4 .\cf10 imgThumbnail\cf4 .\cf5 image\cf4 .\cf5 size\cf4 .\cf5 height\cf4 /\cf10 viewPlayer\cf4 .\cf5 frame\cf4 .\cf5 size\cf4 .\cf5 height\cf4 ;\
+    \
+    \
+    \cf5 CALayer\cf4  *backgroundLayer = [\cf5 CALayer\cf4  \cf7 layer\cf4 ];\
+    backgroundLayer.\cf5 backgroundColor\cf4  = [[\cf5 UIColor\cf4  \cf7 lightGrayColor\cf4 ] \cf7 colorWithAlphaComponent\cf4 :\cf9 0.7\cf4 ].\cf5 CGColor\cf4 ;\
+    backgroundLayer.\cf5 frame\cf4  = \cf7 CGRectMake\cf4 (\cf9 0\cf4 , (diffPointY-\cf9 15\cf4 ) * aScale, videoSize.\cf5 width\cf4 , \cf9 30\cf4  * aScale);\
+ \
+    \cf5 CATextLayer\cf4  *titleLayer = [\cf5 CATextLayer\cf4  \cf7 layer\cf4 ];\
+    titleLayer.\cf5 string\cf4  = \cf10 txtSnap\cf4 .\cf5 text\cf4 ;\
+    titleLayer.\cf5 fontSize\cf4  = \cf9 14\cf4 *aScale;\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf8 //    titleLayer.foregroundColor = [UIColor blackColor].CGColor;\cf4 \
+\cf8 //    titleLayer.foregroundColor = _txtSnap.textColor.CGColor;\cf4 \
+\cf8 //    titleLayer.shadowOpacity = 0.5;\cf4 \
+    titleLayer.\cf5 alignmentMode\cf4  = \cf5 kCAAlignmentCenter\cf4 ;\
+    titleLayer.\cf5 frame\cf4  = \cf7 CGRectMake\cf4 (\cf9 0\cf4 , -(\cf9 4\cf4 *aScale), backgroundLayer.\cf5 frame\cf4 .\cf5 size\cf4 .\cf5 width\cf4 , backgroundLayer.\cf5 frame\cf4 .\cf5 size\cf4 .\cf5 height\cf4 );\
+    \
+     [backgroundLayer \cf7 addSublayer\cf4 :titleLayer];\
+    \
+    \
+    \cf5 CALayer\cf4  *parentLayer = [\cf5 CALayer\cf4  \cf7 layer\cf4 ];\
+    \cf5 CALayer\cf4  *videoLayer = [\cf5 CALayer\cf4  \cf7 layer\cf4 ];\
+    parentLayer.\cf5 frame\cf4  = \cf7 CGRectMake\cf4 (\cf9 0\cf4 , \cf9 0\cf4 , videoSize.\cf5 width\cf4 , videoSize.\cf5 height\cf4 );\
+    videoLayer.\cf5 frame\cf4  = \cf7 CGRectMake\cf4 (\cf9 0\cf4 , \cf9 0\cf4 , videoSize.\cf5 width\cf4 , videoSize.\cf5 height\cf4 );\
+    [parentLayer \cf7 addSublayer\cf4 :videoLayer];\
+    \cf8 //    [parentLayer addSublayer:aLayer];\cf4 \
+    [parentLayer \cf7 addSublayer\cf4 :backgroundLayer];\
+\cf8 //    [parentLayer addSublayer:titleLayer]; //ONLY IF WE ADDED TEXT\cf4 \
+    \
+    \cf8 // 3.1 - Create AVMutableVideoCompositionInstruction\cf4 \
+    \cf5 AVMutableVideoCompositionInstruction\cf4  *mainInstruction = [\cf5 AVMutableVideoCompositionInstruction\cf4  \cf7 videoCompositionInstruction\cf4 ];\
+    mainInstruction.\cf5 timeRange\cf4  = \cf7 CMTimeRangeMake\cf4 (\cf5 kCMTimeZero\cf4 , videoAsset.\cf5 duration\cf4 );\
+    \
+    \
+    \cf8 // 3.2 - Create an AVMutableVideoCompositionLayerInstruction for the video track and fix the orientation.\cf4 \
+    \cf5 AVMutableVideoCompositionLayerInstruction\cf4  *videolayerInstruction = [\cf5 AVMutableVideoCompositionLayerInstruction\cf4  \cf7 videoCompositionLayerInstructionWithAssetTrack\cf4 :videoTrack];\
+    \cf5 AVAssetTrack\cf4  *videoAssetTrack = [[videoAsset \cf7 tracksWithMediaType\cf4 :\cf5 AVMediaTypeVideo\cf4 ] \cf7 objectAtIndex\cf4 :\cf9 0\cf4 ];\
+    \
+    \cf6 BOOL\cf4  isVideoAssetPortrait_  = \cf6 NO\cf4 ;\
+    \cf5 CGAffineTransform\cf4  videoTransform = videoAssetTrack.\cf5 preferredTransform\cf4 ;\
+    \cf6 if\cf4  (videoTransform.\cf5 a\cf4  == \cf9 0\cf4  && videoTransform.\cf5 b\cf4  == \cf9 1.0\cf4  && videoTransform.\cf5 c\cf4  == -\cf9 1.0\cf4  && videoTransform.\cf5 d\cf4  == \cf9 0\cf4 ) \{\
+        isVideoAssetPortrait_ = \cf6 YES\cf4 ;\
+    \}\
+    \cf6 if\cf4  (videoTransform.\cf5 a\cf4  == \cf9 0\cf4  && videoTransform.\cf5 b\cf4  == -\cf9 1.0\cf4  && videoTransform.\cf5 c\cf4  == \cf9 1.0\cf4  && videoTransform.\cf5 d\cf4  == \cf9 0\cf4 ) \{\
+        \
+        isVideoAssetPortrait_ = \cf6 YES\cf4 ;\
+    \}\
+    \cf6 if\cf4  (videoTransform.\cf5 a\cf4  == \cf9 1.0\cf4  && videoTransform.\cf5 b\cf4  == \cf9 0\cf4  && videoTransform.\cf5 c\cf4  == \cf9 0\cf4  && videoTransform.\cf5 d\cf4  == \cf9 1.0\cf4 ) \{\
+        isVideoAssetPortrait_  = \cf6 NO\cf4 ;\
+    \}\
+    \cf6 if\cf4  (videoTransform.\cf5 a\cf4  == -\cf9 1.0\cf4  && videoTransform.\cf5 b\cf4  == \cf9 0\cf4  && videoTransform.\cf5 c\cf4  == \cf9 0\cf4  && videoTransform.\cf5 d\cf4  == -\cf9 1.0\cf4 ) \{\
+        isVideoAssetPortrait_  = \cf6 NO\cf4 ;\
+    \}\
+    [videolayerInstruction \cf7 setTransform\cf4 :videoAssetTrack.\cf5 preferredTransform\cf4  \cf7 atTime\cf4 :\cf5 kCMTimeZero\cf4 ];\
+    [videolayerInstruction \cf7 setOpacity\cf4 :\cf9 0.0\cf4  \cf7 atTime\cf4 :videoAsset.\cf5 duration\cf4 ];\
+    \
+    \
+    \cf8 // 3.3 - Add instructions\cf4 \
+    mainInstruction.\cf5 layerInstructions\cf4  = [\cf5 NSArray\cf4  \cf7 arrayWithObjects\cf4 :videolayerInstruction,\cf6 nil\cf4 ];\
+    \
+    \cf5 AVMutableVideoComposition\cf4  *mainCompositionInst = [\cf5 AVMutableVideoComposition\cf4  \cf7 videoComposition\cf4 ];\
+\cf8 //    mainCompositionInst.renderSize = videoSize;\cf4 \
+\cf8 //    mainCompositionInst.frameDuration = CMTimeMake(1, 30);\cf4 \
+    mainCompositionInst.\cf5 animationTool\cf4  = [\cf5 AVVideoCompositionCoreAnimationTool\cf4  \cf7 videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer\cf4 :videoLayer \cf7 inLayer\cf4 :parentLayer];\
+    \
+    \cf5 CGSize\cf4  naturalSize;\
+    \cf6 if\cf4 (isVideoAssetPortrait_)\{\
+        naturalSize = \cf7 CGSizeMake\cf4 (videoAssetTrack.\cf5 naturalSize\cf4 .\cf5 height\cf4 , videoAssetTrack.\cf5 naturalSize\cf4 .\cf5 width\cf4 );\
+    \} \cf6 else\cf4  \{\
+        naturalSize = videoAssetTrack.\cf5 naturalSize\cf4 ;\
+    \}\
+    \
+    mainCompositionInst.\cf5 renderSize\cf4  = naturalSize;\
+    mainCompositionInst.\cf5 instructions\cf4  = [\cf5 NSArray\cf4  \cf7 arrayWithObject\cf4 :mainInstruction];\
+    mainCompositionInst.\cf5 frameDuration\cf4  = \cf7 CMTimeMake\cf4 (\cf9 1\cf4 , \cf9 30\cf4 );\
+    \
+    \cf8 // 4 - Get path\cf4 \
+    \cf5 NSArray\cf4  *paths = \cf7 NSSearchPathForDirectoriesInDomains\cf4 (\cf7 NSDocumentDirectory\cf4 , \cf7 NSUserDomainMask\cf4 , \cf6 YES\cf4 );\
+    \cf5 NSString\cf4  *documentsDirectory = [paths \cf7 objectAtIndex\cf4 :\cf9 0\cf4 ];\
+    \cf5 NSString\cf4  *myPathDocs =  [documentsDirectory \cf7 stringByAppendingPathComponent\cf4 :\
+                             [\cf5 NSString\cf4  \cf7 stringWithFormat\cf4 :\cf3 @"FinalVideo-%d.mov"\cf4 ,\cf7 arc4random\cf4 () % \cf9 1000\cf4 ]];\
+\cf8 //        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:\cf4 \
+\cf8 //                                 [NSString stringWithFormat:@"FinalVideo.mov"]];\cf4 \
+    \cf5 NSURL\cf4  *url = [\cf5 NSURL\cf4  \cf7 fileURLWithPath\cf4 :myPathDocs];\
+    \
+    \cf8 // 5 - Create exporter\cf4 \
+    \cf5 AVAssetExportSession\cf4  *exporter = [[\cf5 AVAssetExportSession\cf4  \cf7 alloc\cf4 ] \cf7 initWithAsset\cf4 :mixComposition\
+                                                                      \cf7 presetName\cf4 :\cf5 AVAssetExportPresetMediumQuality\cf4 ];\
+    exporter.\cf5 outputURL\cf4 =url;\
+    exporter.\cf5 outputFileType\cf4  = \cf5 AVFileTypeQuickTimeMovie\cf4 ;\
+    exporter.\cf5 shouldOptimizeForNetworkUse\cf4  = \cf6 YES\cf4 ;\
+    exporter.\cf5 videoComposition\cf4  = mainCompositionInst;\
+    [exporter \cf7 exportAsynchronouslyWithCompletionHandler\cf4 :^\{\
+        \cf7 dispatch_async\cf4 (\cf7 dispatch_get_main_queue\cf4 (), ^\{\
+            [\cf6 self\cf4  \cf11 saveVideo\cf4 :exporter \cf11 withDesinationPath\cf4 :myPathDocs];\
+        \});\
+    \}];\
+\}\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\b 6 >  
+\b0 Save Exported video\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 -(\cf6 void\cf4 )saveVideo:(\cf5 AVAssetExportSession\cf4 *)exportSession withDesinationPath:(\cf5 NSString\cf4  *)destinationPath\{\
+    \
+    \cf6 switch\cf4  (exportSession.\cf5 status\cf4 )\
+    \{\
+        \cf6 case\cf4  \cf7 AVAssetExportSessionStatusCompleted\cf4 :\
+            \cf7 NSLog\cf4 (\cf3 @"Export OK"\cf4 );\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf8 //            if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(destinationPath)) \{\cf4 \
+\cf8 //                UISaveVideoAtPathToSavedPhotosAlbum(destinationPath, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);\cf4 \
+\cf8 //            \}\cf4 \
+\cf8 //             NSURL *aURL = [NSURL fileURLWithPath:destinationPath];\cf4 \
+             [\cf6 self\cf4  \cf11 playVideoFullScreen\cf4 :[\cf5 NSURL\cf4  \cf7 fileURLWithPath\cf4 :destinationPath]];\
+            \cf6 break\cf4 ;\
+        \cf6 case\cf4  \cf7 AVAssetExportSessionStatusFailed\cf4 :\
+            \cf7 NSLog\cf4  (\cf3 @"AVAssetExportSessionStatusFailed: %@"\cf4 , exportSession.\cf5 error\cf4 );\
+            \cf6 break\cf4 ;\
+        \cf6 case\cf4  \cf7 AVAssetExportSessionStatusCancelled\cf4 :\
+            \cf7 NSLog\cf4 (\cf3 @"Export Cancelled"\cf4 );\
+            \cf6 break\cf4 ;\
+    \}\
+\}
+\f0\fs24 \cf0 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 -(\cf6 void\cf4 ) video: (\cf5 NSString\cf4  *) videoPath didFinishSavingWithError: (\cf5 NSError\cf4  *) error contextInfo: (\cf6 void\cf4  *) contextInfo\
+\{\
+    \cf6 if\cf4 (error)\
+        \cf7 NSLog\cf4 (\cf3 @"Finished saving video with error: %@"\cf4 , error);\
+    \cf5 NSURL\cf4  *aURL = [\cf5 NSURL\cf4  \cf7 fileURLWithPath\cf4 :videoPath];\
+    [\cf6 self\cf4  \cf11 playVideoFullScreen\cf4 :aURL];\
+\}\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\b 7 >  
+\b0 Play Video\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf4 \CocoaLigature0 -(\cf6 void\cf4 )playVideoFullScreen:(\cf5 NSURL\cf4 *)videoPathURL\{\
+    \
+    \cf8 // create an AVPlayer\cf4 \
+    \cf5 AVPlayer\cf4  *player = [\cf5 AVPlayer\cf4  \cf7 playerWithURL\cf4 :videoPathURL];\
+    \
+    \cf8 // create a player view controller\cf4 \
+    \cf5 AVPlayerViewController\cf4  *controller = [[\cf5 AVPlayerViewController\cf4  \cf7 alloc\cf4 ] \cf7 init\cf4 ];\
+    [\cf6 self\cf4  \cf7 presentViewController\cf4 :controller \cf7 animated\cf4 :\cf6 YES\cf4  \cf7 completion\cf4 :\cf6 nil\cf4 ];\
+    controller.\cf5 player\cf4  = player;\
+    [player \cf7 play\cf4 ];\
+\}\
+\
+    - video play infinite(repeat and repeat)\
+\
+-(\cf6 void\cf4 )playVideo:(\cf5 NSURL\cf4 *)videoPathURL\{\
+    \
+    \
+    \cf8 // create an AVPlayer\cf4 \
+    \cf5 AVPlayer\cf4  *player = [\cf5 AVPlayer\cf4  \cf7 playerWithURL\cf4 :videoPathURL];\
+    player.\cf5 actionAtItemEnd\cf4  = \cf7 AVPlayerActionAtItemEndNone\cf4 ;\
+    \cf8 //player.volume = 0.0;\cf4 \
+    \
+    \cf5 AVPlayerLayer\cf4  *playerLayer = [\cf5 AVPlayerLayer\cf4  \cf7 playerLayerWithPlayer\cf4 :player];\
+    playerLayer.\cf5 frame\cf4  = \cf10 _imgThumbnail\cf4 .\cf5 bounds\cf4 ;\
+    playerLayer.\cf5 videoGravity\cf4  = \cf5 AVLayerVideoGravityResizeAspectFill\cf4 ;\
+    [\cf10 viewPlayer\cf4 .\cf5 layer\cf4  \cf7 addSublayer\cf4 :playerLayer];\
+    [player \cf7 play\cf4 ];\
+    \
+    [[\cf5 NSNotificationCenter\cf4  \cf7 defaultCenter\cf4 ] \cf7 addObserver\cf4 :\cf6 self\cf4 \
+                                             \cf7 selector\cf4 :\cf6 @selector\cf4 (playerItemDidReachEnd:)\
+                                                 \cf7 name\cf4 :\cf5 AVPlayerItemDidPlayToEndTimeNotification\cf4 \
+                                               \cf7 object\cf4 :[player \cf7 currentItem\cf4 ]];\
+\}\
+\
+- (\cf6 void\cf4 )playerItemDidReachEnd:(\cf5 NSNotification\cf4  *)notification \{\
+    \cf5 AVPlayerItem\cf4  *p = [notification \cf7 object\cf4 ];\
+    [p \cf7 seekToTime\cf4 :\cf5 kCMTimeZero\cf4 ];\
+\}
+\f0\fs24 \cf0 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+
+\b 7 >  
+\b0 Some other help full functions\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+
+\f1\fs30 \cf2 \CocoaLigature0 #pragma mark: Class Methods\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf4 -(\cf5 CGSize\cf4 )videoSizeFromURL:(\cf5 NSURL\cf4 *)mediaURL\{\
+    \
+    \cf5 AVURLAsset\cf4  *asset = [\cf5 AVURLAsset\cf4  \cf7 URLAssetWithURL\cf4 :mediaURL \cf7 options\cf4 :\cf6 nil\cf4 ];\
+    \cf5 AVAssetTrack\cf4  *track = [[asset \cf7 tracksWithMediaType\cf4 :\cf5 AVMediaTypeVideo\cf4 ] \cf7 firstObject\cf4 ];\
+    \cf5 CGSize\cf4  dimensions = \cf2 CGSizeApplyAffineTransform\cf4 (track.\cf5 naturalSize\cf4 , track.\cf5 preferredTransform\cf4 );\
+    \cf6 return\cf4  dimensions;\
+\}\
+\
+\
+-(\cf5 UIImage\cf4  *)generateThumbImage : (\cf5 NSURL\cf4  *)filepath\
+\{\
+    \
+    \cf5 AVAsset\cf4  *asset = [\cf5 AVAsset\cf4  \cf7 assetWithURL\cf4 :filepath];\
+    \cf5 AVAssetImageGenerator\cf4  *imageGenerator = [[\cf5 AVAssetImageGenerator\cf4  \cf7 alloc\cf4 ]\cf7 initWithAsset\cf4 :asset];\
+    imageGenerator.\cf5 appliesPreferredTrackTransform\cf4  = \cf6 YES\cf4 ;\
+    \cf5 CMTime\cf4  time = [asset \cf7 duration\cf4 ];\
+    time.\cf5 value\cf4  = \cf9 0\cf4 ;\
+    \cf5 CGImageRef\cf4  imageRef = [imageGenerator \cf7 copyCGImageAtTime\cf4 :time \cf7 actualTime\cf4 :\cf6 NULL\cf4  \cf7 error\cf4 :\cf6 NULL\cf4 ];\
+    \cf5 UIImage\cf4  *thumbnail = [\cf5 UIImage\cf4  \cf7 imageWithCGImage\cf4 :imageRef];\
+    \cf7 CGImageRelease\cf4 (imageRef);  \cf8 // CGImageRef won't be released by ARC\cf4 \
+    \
+    \cf6 return\cf4  thumbnail;\
+\}\
+\
+-(\cf5 CGSize\cf4 ) CGSizeAspectFit:(\cf5 CGSize\cf4 )aspectRatio withBounding:(\cf5 CGSize\cf4 )boundingSize\
+\{\
+    \cf6 float\cf4  mW = boundingSize.\cf5 width\cf4  / aspectRatio.\cf5 width\cf4 ;\
+    \cf6 float\cf4  mH = boundingSize.\cf5 height\cf4  / aspectRatio.\cf5 height\cf4 ;\
+    \cf6 if\cf4 ( mH < mW )\
+        boundingSize.\cf5 width\cf4  = boundingSize.\cf5 height\cf4  / aspectRatio.\cf5 height\cf4  * aspectRatio.\cf5 width\cf4 ;\
+    \cf6 else\cf4  \cf6 if\cf4 ( mW < mH )\
+        boundingSize.\cf5 height\cf4  = boundingSize.\cf5 width\cf4  / aspectRatio.\cf5 width\cf4  * aspectRatio.\cf5 height\cf4 ;\
+    \cf6 return\cf4  boundingSize;\
+\}
+\f0\b\fs24 \cf0 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+}
