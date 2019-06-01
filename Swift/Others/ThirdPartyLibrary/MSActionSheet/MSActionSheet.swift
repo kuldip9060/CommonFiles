@@ -4,13 +4,59 @@
 //  Created by Maor Shams on 07/04/2017.
 //  Copyright © 2017 Maor Shams. All rights reserved.
 //  Modified by Kuldip
-//
-// *** How to Use ***
-//  let msActionSheet = MSActionSheet.instance
-//  msActionSheet.showFullActionSheet(on: self,over: btn){ (image) in
-//    btn.setImage(image, for: .normal)
-//  }
-//  msActionSheet.tintColor(color: Constants.kColorBluish)
+//****************
+// Example 1 - Show full actionsheet, include library, front camera, rear camera
+
+//MSActionSheet(viewController: self, sourceView: sender).showFullActionSheet {
+//    sender.setImage($0, for: .normal)
+//}
+
+//  Example 2 - Create custom actionsheet with default params
+
+/*
+ 
+ MSActionSheet(viewController: self, sourceView: sender)
+ .add(.cancel)
+ .add(.library)
+ .add(.rearCamera)
+ .add(.frontCamera).show {
+ sender.setImage($0, for: .normal)
+ }
+ 
+ */
+
+//  Example 3 - Create custom actionsheet with custom params
+
+/*
+ 
+ MSActionSheet(viewController: self, sourceView: sender)
+ .add(.frontCamera, title: "Selfie camera", image: #imageLiteral(resourceName: "msactionsheet_selfie"))
+ .add(.rearCamera, defaultImage: true)
+ .setTint(color: .purple)
+ .add(.cancel, style: .destructive)
+ .show {
+ sender.setImage($0, for: .normal)
+ }
+ 
+ */
+
+
+//  Example 4 - Create custom actionsheet with custom actions
+
+/*
+ 
+ MSActionSheet(viewController: self, sourceView: sender)
+ .add(.library, defaultImage: true)
+ .addCustom(title: "Print", isDestructive: false, image: #imageLiteral(resourceName: "print_photo")) {
+ print("Printing the photo")
+ }.addCustom(title: "Share", isDestructive: true, image: #imageLiteral(resourceName: "share_photo")) {
+ print("Sharing the photo")
+ }.add(.cancel)
+ .show {
+ sender.setImage($0, for: .normal)
+ }
+ */
+//****************
 //
 //
 import UIKit
@@ -19,7 +65,7 @@ import MobileCoreServices
 class MSActionSheet: UIAlertController {
     
     // preferredStyle is a read-only property, so you have to override it
-    override var preferredStyle: UIAlertControllerStyle {
+    override var preferredStyle: UIAlertController.Style {
         return .actionSheet
     }
     
@@ -62,19 +108,19 @@ class MSActionSheet: UIAlertController {
     /// Create Full ActionSheet include library, front camera, rear camera, cancel button and default images.
     /// - parameters:
     ///   - completion: Execute after the user took the image, returns optional UIImage, returns nil if the user did not select
-   /* func showFullActionSheet(completion : @escaping (_ : UIImage?) -> Void) {
+    func showFullActionSheet(completion : @escaping (_ : UIImage?) -> Void) {
         add(.library, defaultImage : true)
             .add(.frontCamera, defaultImage : true)
             .add(.rearCamera, defaultImage : true)
             .add(.cancel)
             .show(completion: completion)
-    }*/
-    func showFullActionSheet(on vc : UIViewController, over btn : UIButton,handler : @escaping (_ : UIImage?) -> Void) {
+    }
+    /*func showFullActionSheet(on vc : UIViewController, over btn : UIButton,handler : @escaping (_ : UIImage?) -> Void) {
         let sheet = create().addLibrary().addFrontCamera().addRearCamera().addCancelButton()
         sheet.show(on: vc,over: btn){ (image : UIImage?) in
             handler(image)
         }
-    }
+    }*/
     
     /// Add new alert action to the action sheet.
     /// - parameters:
@@ -86,13 +132,13 @@ class MSActionSheet: UIAlertController {
     
     func add(_ type : ActionType,
              title : String? = nil,
-             style : UIAlertActionStyle? = nil,
+             style : UIAlertAction.Style? = nil,
              image : UIImage? = nil,
              defaultImage : Bool = false) -> MSActionSheet{
         
         let newTitle : String = (title == nil) ? type.title : title!
         let newImage : UIImage? = defaultImage == true ? type.image : image
-        let newStyle : UIAlertActionStyle = (type == .cancel && style == nil) ? .cancel : style == nil ? .default : style!
+        let newStyle : UIAlertAction.Style = (type == .cancel && style == nil) ? .cancel : style == nil ? .default : style!
         
         let action = MSActionSheetAction(actionTitle: newTitle,
                                          style: newStyle,
@@ -142,13 +188,6 @@ class MSActionSheet: UIAlertController {
             self.popoverPresentationController?.sourceRect = source.bounds
         }
         
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            if let presenter = MSActionSheet.sheet?.popoverPresentationController {
-                presenter.sourceView = btn
-                presenter.sourceRect = btn.bounds
-            }
-        }
-        
         currentvViewController?.present(self, animated: true, completion: nil)
     }
     
@@ -194,7 +233,7 @@ class MSActionSheet: UIAlertController {
         return self
     }
     
-    private func isDestructive(_ destructive : Bool) -> UIAlertActionStyle {
+    private func isDestructive(_ destructive : Bool) -> UIAlertAction.Style {
         return destructive ? .destructive : .default
     }
     
@@ -202,11 +241,11 @@ class MSActionSheet: UIAlertController {
 extension MSActionSheet: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     // get info about selected image when finish picking
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // dismiss picker
         picker.dismiss(animated: true) { [weak self] in
             // get image
-            if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
+            if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
                 self?.onFinishPicking?(image)
             }
         }
@@ -255,7 +294,7 @@ class MSActionSheetAction : UIAlertAction{
     var type : MSActionSheet.ActionType?
     
     convenience init(actionTitle: String,
-                     style: UIAlertActionStyle,
+                     style: UIAlertAction.Style,
                      image : UIImage? = nil,
                      actionType : MSActionSheet.ActionType? = nil,
                      handler: @escaping ((UIAlertAction) -> Void) ){
